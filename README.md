@@ -1,5 +1,7 @@
 Magic Number Calculator 🔢✨
 
+https://husseinmatar.github.io/magic-number-calculator/
+
 A beautiful and interactive Magic Number Calculator based on Numerology. Enter your birthdate, and the app will calculate your Life Path Number, providing insights into your personality, strengths, and life purpose.
 
 🌟 Features
