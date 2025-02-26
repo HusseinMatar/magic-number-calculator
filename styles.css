@@ -113,6 +113,9 @@ button:hover {
     body {
         overflow-x: hidden;  
         overflow-y: auto;  
+        background-attachment: scroll; 
+        background-size: cover; 
+        min-height: 100%;
     }
     
     .tabs {
@@ -146,6 +149,9 @@ button:hover {
     body {
         overflow-x: hidden;  
         overflow-y: auto;   
+        background-attachment: scroll; 
+        background-size: cover; 
+        min-height: 100%;
     }
     
     .tabs {
