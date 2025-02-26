@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Number Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body onclick="hideContainers(event)">
+    <div class="tabs">
+        <button class="tab" onclick="showSection('info')">What is the Magic Number?</button>
+        <button class="tab" onclick="showSection('about')">How to calculate the Magic Number?</button>
+        <button class="tab" onclick="showSection('calculator')">Calculate Your Magic Number</button>
+    </div>
+    
+    <div class="container" id="info">
+        <h2>What is the Magic Number?</h2>
+        <p>According to Numerology, the Magic Number also known as the "Life Path Number" is derived from your birthdate. It provides insights into your personality, strengths, and life purpose.</p>
+    </div>
+    
+    <div class="container" id="calculator">
+        <h2>Magic Number Calculator</h2>
+        <label for="birthdate">Enter Your Birthdate:</label>
+        <input type="date" id="birthdate">
+        <button onclick="calculateMagicNumber()">Calculate</button>
+        <p id="result"></p>
+        <p id="description"></p>
+    </div>
+
+    <div class="container" id="about">
+        <h2>How is the Magic Number Calculated?</h2>
+        <p>
+            1.&nbsp;Write your birthdate in DD/MM/YYYY format.<br>
+            2.&nbsp;Add all the digits together to get a total.<br>
+            3.&nbsp;If you get a single digit (1-9) or a Master Number (11, 22, 33) then it is your Magic Number.<br>
+            4.&nbsp;If the total is 10 or higher, add the digits of the sum together to get your Magic Number.
+        </p>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            document.getElementById('info').style.display = 'none';
+            document.getElementById('calculator').style.display = 'none';
+            document.getElementById('about').style.display = 'none';
+            document.getElementById(sectionId).style.display = 'block';
+        }
+        
+        function calculateMagicNumber() {
+            let birthdate = document.getElementById('birthdate').value;
+            let resultElement = document.getElementById('result');
+            let descriptionElement = document.getElementById('description');
+            
+            if (!birthdate) {
+                resultElement.style.display = "none";
+                descriptionElement.style.display = "none";
+                return;
+            }
+            
+            let digits = birthdate.replace(/-/g, '').split('').map(Number);
+            let sum = digits.reduce((a, b) => a + b, 0);
+            
+            while (sum >= 10 && sum !== 11 && sum !== 22 && sum !== 33) {
+                sum = sum.toString().split('').map(Number).reduce((a, b) => a + b, 0);
+            }
+            
+            let descriptions = {
+                1: "Number 1 symbolizes leadership, independence, and originality.",
+                2: "Number 2 represents harmony, balance, and partnership.",
+                3: "Number 3 signifies creativity, self-expression, and joy.",
+                4: "Number 4 embodies stability, hard work, and determination.",
+                5: "Number 5 stands for adventure, freedom, and adaptability.",
+                6: "Number 6 relates to love, responsibility, and compassion.",
+                7: "Number 7 represents wisdom, intuition, and spirituality.",
+                8: "Number 8 is associated with power, success, and ambition.",
+                9: "Number 9 symbolizes humanitarianism, generosity, and wisdom.",
+                11: "It is a Master Number, it stands for intuition, inspiration, and enlightenment.",
+                22: "It is a Master Number, it is about building dreams into reality, mastery, and great potential.",
+                33: "It is a Master Number, also known as the Master Teacher. It symbolizes compassion, wisdom, healing, and service to others."
+            };
+            
+            resultElement.innerText = "Your Magic Number is: " + sum;
+            descriptionElement.innerText = descriptions[sum] || "No description available.";
+            resultElement.style.display = "block";
+            descriptionElement.style.display = "block";
+        }
+        function hideContainers(event) {
+            if (!event.target.closest('.container') && !event.target.closest('.tab')) {
+                document.getElementById('info').style.display = 'none';
+                document.getElementById('calculator').style.display = 'none';
+                document.getElementById('about').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
